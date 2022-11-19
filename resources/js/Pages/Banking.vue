@@ -37,11 +37,29 @@ const subSidebarVisible = ref(true);
                         tabindex="0"
                         @click="
                             (subSidebarVisible = !subSidebarVisible),
-                                $emit('usman', subSidebarVisible)
+                                $emit('slideStatus', subSidebarVisible)
                         "
                     >
-                        <span class="menu-toggle has-chevron"
+                        <span
+                            class="menu-toggle has-chevron"
+                            v-if="subSidebarVisible"
                             ><span class="active icon-box-toggl"
+                                ><span class="rotate"
+                                    ><i
+                                        aria-hidden="true"
+                                        class="icon-line-top"
+                                    ></i
+                                    ><i
+                                        aria-hidden="true"
+                                        class="icon-line-center"
+                                    ></i
+                                    ><i
+                                        aria-hidden="true"
+                                        class="icon-line-bottom"
+                                    ></i></span></span
+                        ></span>
+                        <span class="menu-toggle has-chevron" v-else
+                            ><span class="active icon-box-toggle"
                                 ><span class="rotate"
                                     ><i
                                         aria-hidden="true"

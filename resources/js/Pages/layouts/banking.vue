@@ -43,7 +43,7 @@ function switchSidebar(id: string) {
         activeMobileSubsidebar.value = id;
     }
 }
-function oye(e) {
+function handleSlide(e) {
     subSidebarVisible.value = e;
     console.log(subSidebarVisible.value);
 }
@@ -381,7 +381,7 @@ watchPostEffect(() => {
     <SearchPanel />
     <TaskPanel /> -->
 
-        <Banking @usman="oye($event)" />
+        <Banking @slideStatus="handleSlide($event)" />
 
         <!-- <VViewWrapper>
       <VPageContentWrapper>

@@ -33,6 +33,7 @@ const route = useRoute();
 const isMobileSidebarOpen = ref(false);
 const isDesktopSidebarOpen = ref(props.openOnMounted);
 const activeMobileSubsidebar = ref(props.defaultSidebar);
+const subSidebarVisible = ref(true);
 
 function switchSidebar(id: string) {
     if (id === activeMobileSubsidebar.value) {
@@ -42,7 +43,10 @@ function switchSidebar(id: string) {
         activeMobileSubsidebar.value = id;
     }
 }
-
+function handleSlide(e) {
+    subSidebarVisible.value = e;
+    console.log(subSidebarVisible.value);
+}
 /**
  * watchPostEffect callback will be executed each time dependent reactive values has changed
  */
@@ -341,7 +345,12 @@ watchPostEffect(() => {
           v-else-if="isDesktopSidebarOpen && activeMobileSubsidebar === 'layout'"
           @close="isDesktopSidebarOpen = false"
         /> -->
-        <div class="sidebar-panel is-generic">
+        <div
+            class="sidebar-panel is-generic"
+            :class="
+                subSidebarVisible ? 'sub-sidebar-open2' : 'sub-sidebar-close2'
+            "
+        >
             <div class="subpanel-header">
                 <h3 class="no-mb">Pages</h3>
                 <div
@@ -372,7 +381,7 @@ watchPostEffect(() => {
     <SearchPanel />
     <TaskPanel /> -->
 
-        <Banking2 />
+        <Banking2 @slideStatus="handleSlide($event)" />
 
         <!-- <VViewWrapper>
       <VPageContentWrapper>
@@ -425,6 +434,16 @@ watchPostEffect(() => {
 </template>
 
 <style lang="scss">
+.sub-sidebar-open2 {
+    margin-left: 0px;
+    transition: all;
+    transition-duration: 0.3s;
+}
+.sub-sidebar-close2 {
+    margin-left: -380px;
+    transition: all;
+    transition-duration: 0.3s;
+}
 @import "../../../scss/layout/sidebar-panel.scss";
 .view-wrapper {
     .page-content {
