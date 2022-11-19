@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 defineProps({
     canLogin: Boolean,
@@ -7,6 +8,9 @@ defineProps({
     laravelVersion: String,
     phpVersion: String,
 });
+const handleLogout = () => {
+     Inertia.post(route('logout'));
+}
 </script>
 
 <template>
@@ -15,6 +19,7 @@ defineProps({
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</Link>
+            <Link v-if="$page.props.user" href="#" @click.prevent="handleLogout" class="ml-2 text-sm text-gray-700 dark:text-gray-500 underline">Logout</Link>
 
             <template v-else>
                 <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</Link>

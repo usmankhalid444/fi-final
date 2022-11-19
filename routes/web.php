@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/login', function (){
+Route::get('/signin', function (){
     return Inertia::render('login');
 });
 
@@ -50,7 +50,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+    Route::get('/banking', function () {
+        return Inertia::render('layouts/banking');
     })->name('dashboard');
 });
